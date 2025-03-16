@@ -38,36 +38,42 @@
             display: flex;
             align-items: center;
         }
+        Copy
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/Hero.jpg'), #000000;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/Hero.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-        }
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 1s;
+}
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: 1s;
-        }
+.cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    margin-top: 30px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 1s;
+}
 
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background-color: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            margin-top: 30px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: 1s;
-        }
 
         /* Projects Section */
         .projects {
@@ -78,6 +84,7 @@
             padding-top: 60px; /* Add padding to the top */
             overflow-x:auto ; 
             white-space:nowrap; 
+            display: none;
             
         }
 
@@ -87,10 +94,6 @@
             gap: 40px;
             padding-bottom: 20px;
         }
-        .projects::-webkit-scrollbar {
-            display: none;
-        }
-
 
         .project-card {
             flex: 0 0 auto ; 
@@ -120,13 +123,11 @@
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             align-items: center;
-        }
-        .about-content {
-        opacity: 0;
-        transform: translateX(-50px);
-        transition: 1s cubic-bezier(0.4, 0, 0.2, 1);
-        max-width: 1200px;
-        margin: 0 auto;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: 1s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .about-content.visible {
@@ -181,15 +182,11 @@
             width: 280px;
             text-decoration: none;
             color: inherit;
-        }
-                /* ADD these contact card animations */
-        .contact-card {
             opacity: 0;
             transform: translateY(30px);
             transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             transition-delay: calc(var(--index) * 0.2s);
         }
-
         .contact-card:hover {
             transform: translateY(-5px);
         }
@@ -227,9 +224,6 @@
             margin-top: 40px;
             text-align: center;
             color:var(--text-color);
-        }
-        .hero{
-            background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7),url('images/Hero.jpg'));
         }
 
         .social-links a {
@@ -284,6 +278,33 @@
 
     .close-btn:hover {
         transform: rotate(90deg);
+    }
+
+
+        /*Hero*/
+            /* Mobile Styles */
+    @media (max-width: 768px) {
+        .hero {
+            background-size: cover;
+            background-position: top center;
+            min-height: 80vh;
+        }
+
+        .hero-content h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            padding: 12px 30px;
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero {
+            min-height: 70vh; /* Adjust for very small screens */
+        }
     }
 
 
