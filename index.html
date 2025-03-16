@@ -37,43 +37,41 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-        } copy
+        }        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/Hero.jpg'), #000000;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-        
-.hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/Hero.jpg'), #000000;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
-}
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s;
+        }
 
-.hero-content h1 {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 1s;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 15px 40px;
-    background-color: var(--accent-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    margin-top: 30px;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 1s;
-}
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s;
+        }
 
 
         /* Projects Section */
@@ -85,8 +83,11 @@
             padding-top: 60px; /* Add padding to the top */
             overflow-x:auto ; 
             white-space:nowrap; 
-            display: none;
             
+        }
+
+        .projects::-webkit-scrollbar {
+            display: none;
         }
 
         .project-grid {
@@ -95,6 +96,8 @@
             gap: 40px;
             padding-bottom: 20px;
         }
+        
+
 
         .project-card {
             flex: 0 0 auto ; 
