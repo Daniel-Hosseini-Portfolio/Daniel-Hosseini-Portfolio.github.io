@@ -38,7 +38,8 @@
             display: flex;
             align-items: center;
         }
-        Copy
+
+        
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/Hero.jpg'), #000000;
     background-size: cover;
@@ -283,29 +284,30 @@
 
         /*Hero*/
             /* Mobile Styles */
-    @media (max-width: 768px) {
-        .hero {
-            background-size: cover;
-            background-position: top center;
-            min-height: 80vh;
-        }
-
-        .hero-content h1 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-
-        .cta-button {
-            padding: 12px 30px;
-            font-size: 1rem;
-        }
+@media (max-width: 768px) {
+    .hero {
+        background-size: contain; /* Change from cover to contain */
+        background-position: top center; /* Adjust the position */
+        min-height: 80vh; /* Adjust the height */
     }
 
-    @media (max-width: 480px) {
-        .hero {
-            min-height: 70vh; /* Adjust for very small screens */
-        }
+    .hero-content h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
     }
+
+    .cta-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .hero {
+        min-height: 70vh; /* Adjust for very small screens */
+    }
+}
 
 
         /* Responsive Design */
