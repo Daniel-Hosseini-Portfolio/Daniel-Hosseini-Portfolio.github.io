@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+        --primary-color: #1a1a1a;  /* Changed from #2d2d2d */
+        --accent-color: #0077ff;
+        --text-color: #ffffff;     /* Changed from #333 */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ADD THESE BODY STYLES */
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #000000; /* New line */
+        }
+
+        /* Sections Common Styles */
+        section {
+            padding: 100px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/Hero.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s;
+        }
+
+        /* Projects Section */
+        .projects {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+            background-color: #121212;
+            display: block; /* Change from flex to block */
+            padding-top: 60px; /* Add padding to the top */
+            overflow-x:auto ; 
+            white-space:nowrap; 
+            
+        }
+
+        .project-grid {
+            display: inline-flex;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            padding-bottom: 20px;
+        }
+        .projects::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .project-card {
+            flex: 0 0 auto ; 
+            width:500px;
+            background: var(--primary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(235, 228, 228, 0.148);
+            opacity: 0;
+            transition-delay: calc(var(--index)*0.3s);
+            transform: translateY(30px) ;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+            
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-content {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: 1s cubic-bezier(0.4, 0, 0.2, 1);
+        max-width: 1200px;
+        margin: 0 auto;
+        }
+
+        .about-content.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .about-text p {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.8s;
+            transition-delay: 0.3s;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .skills-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .skills-list li {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: 0.5s ease-in-out;
+            margin: 15px 0;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+
+
+        /*contact*/
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 800px;
+            margin-inline: auto;
+        }
+
+
+        .contact-card {
+            background: var(--primary-color);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            width: 280px;
+            text-decoration: none;
+            color: inherit;
+        }
+                /* ADD these contact card animations */
+        .contact-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition-delay: calc(var(--index) * 0.2s);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-card i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input, textarea {
+            background-color: #2d2d2d;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-color: #404040;
+            border-radius: 5px;
+        }
+            /* ADD PLACEHOLDER STYLING */
+        input::placeholder,
+        textarea::placeholder {
+            color: #cccccc;
+        }
+
+
+        .social-links {
+            margin-top: 40px;
+            text-align: center;
+            color:var(--text-color);
+        }
+        .hero{
+            background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7),url('images/Hero.jpg'));
+        }
+
+        .social-links a {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+
+                   /* Image Modal */
+    .image-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-visible {
+        display: flex;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        position: relative;
+    }
+
+    .modal-content img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 80vh;
+        border-radius: 5px;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: -35px;
+        right: -35px;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .close-btn:hover {
+        transform: rotate(90deg);
+    }
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 60px 20px;
+            }
+        }
+
+ 
+        @media (max-width: 768px) {
+            .close-btn {
+                top: -50px;
+                right: 10px;
+                font-size: 30px;
+            }
+        }
+
+            /* ADD media query for mobile */
+        @media (max-width: 768px) {
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Add this to your CSS */
+    .hero-content h1,
+    .cta-button,
+    .project-card,
+    .about-content,
+    .contact-card {
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .skills-list li {
+        transition: opacity 0.4s ease-out, 
+                    transform 0.4s ease-out;
+    }
+    /* Add this at the end of your CSS */
+    .project-card {
+        transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transition-delay: calc(var(--index) * 0.2s);
+    }
+
+    .project-grid:not(.visible) .project-card {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .project-grid.visible .project-card {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .project-card {
+        --index: 0; /* Default index value */
+        transition-delay: calc(var(--index) * 0.3s);
+    }
+
+
+    /*Project container */ 
+    /* Add this CSS for the project container and header */
+    .project-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .section-header {
+        text-align: left; /* Align text to the left */
+        margin-bottom: 40px; /* Space between header and project grid */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .section-header h2 {
+        font-size: 2.5rem;
+        margin-bottom: 10px; /* Space between title and description */
+        color: var(--text-color);
+    }
+
+    .section-header p {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 600px;
+        margin: 0; /* Remove default margin */
+    }
+
+    /* Add this to make the header animate in when visible */
+    .section-header.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+
+
+
+    /* Contact me */ 
+    /* New Contact Me Section */
+    .contact-me {
+        background-color: var(--primary-color);
+        padding: 100px 20px;
+        text-align: center;
+    }
+
+    .contact-me-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .contact-me h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: var(--text-color);
+    }
+
+    .contact-me p {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 40px;
+    }
+
+    .contact-methods {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .contact-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        transition: transform 0.3s;
+        width: 280px;
+        text-decoration: none;
+        color: inherit;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .contact-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .contact-card i {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        color: var(--accent-color);
+    }
+
+    .contact-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .contact-card p {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    </style>
+</head>
+
+<div class="image-modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <img src="" alt="Full size project image">
+    </div>
+</div>
+<body>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Mathematical Engineering & Machine Intelligence</h1>
+            <a href="#projects" class="cta-button">View My Work</a>
+        </div>
+    </section>
+
+
+
+    <section id="about" class="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About Me</h2>
+                <p>Mathematical Engineer specializing in embedded machine learning solutions. Expertise includes:</p>
+                <ul class="skills-list">
+                    <li>✓ ARM assembly optimization</li>
+                    <li>✓ Real-time image processing</li>
+                    <li>✓ Bare-metal ML implementations</li>
+                    <li>✓ Low-level hardware programming</li>
+                    <li>✓ Computational mathematics</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+<section id="projects" class="projects">
+        <!-- Add this header -->
+        <div class="section-header">
+            <h2>Projects</h2>
+            <p>Explore my latest work in embedded machine learning and AI solutions.</p>
+        </div>
+    <div class="project-grid">
+
+        <div class="project-card">
+            <img src="images/Image1.jpg" alt="ARM Optimization" loading="lazy">
+            <div class="project-info">
+                <h3>ARM Chip Optimization</h3>
+                <p>Bare-metal machine learning implementation</p>
+                <div class="tech-stack">C, Assembly, TensorFlow Lite</div>
+            </div>
+        </div>
+
+
+        <div class="project-card">
+            <img src="images/Image2.jpg" alt="Image Analysis" loading="lazy">
+            <div class="project-info">
+                <h3>Medical Imaging AI</h3>
+                <p>3D image segmentation using CNNs</p>
+                <div class="tech-stack">Python, PyTorch, OpenCV</div>
+            </div>
+        </div>
+
+
+        <div class="project-card">
+            <img src="images/Image3.jpg" alt="Embedded ML" loading="lazy">
+            <div class="project-info">
+                <h3>Edge AI Deployment</h3>
+                <p>MCU-based object detection system</p>
+                <div class="tech-stack">C++, ARM CMSIS, ONNX Runtime</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+ 
+<!-- New Contact Me Section -->
+<section id="contact-me" class="contact-me">
+    <div class="contact-me-content">
+        <h2>Contact Me</h2>
+        <p>Feel free to reach out for collaborations or inquiries.</p>
+        <div class="contact-methods">
+            <a href="mailto:your.email@example.com" class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email Me</h3>
+                <p>your.email@example.com</p>
+            </a>
+            <a href="tel:+1234567890" class="contact-card">
+                <i class="fas fa-phone"></i>
+                <h3>Call Me</h3>
+                <p>+1 (234) 567-890</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+            // Modal functionality
+    const modal = document.querySelector('.image-modal');
+    const modalImg = modal.querySelector('img');
+    const closeBtn = modal.querySelector('.close-btn');
+
+    // Open modal on project image click
+    document.querySelectorAll('.project-card img').forEach(img => {
+        img.addEventListener('click', () => {
+            modal.classList.add('modal-visible');
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+        });
+    });
+
+    // Close modal
+    function closeModal() {
+        modal.classList.remove('modal-visible');
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    
+    // Close when clicking outside image
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // Close with ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+
+
+// Set index for project cards
+document.querySelectorAll('.project-card').forEach((card, index) => {
+    card.style.setProperty('--index', index);
+});
+
+// Remove your current observer code and replace with:
+const observers = [];
+
+// General observer for most elements
+const generalObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            if(entry.target.classList.contains('about-content')) {
+                entry.target.classList.add('visible');
+                const elements = entry.target.querySelectorAll('p, li, .contact-card');
+                elements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.opacity = 1;
+                        el.style.transform = 'translate(0)';
+                    }, index * 200);
+                });
+            } else {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
+            }
+        } else {
+            // Reverse animation logic
+        }
+    });
+}, { threshold: 0.1 });
+
+// Special observer for project grid
+const projectGrid = document.querySelector('.project-grid');
+// Replace your existing observer code with this
+
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Animate elements IN
+            if(entry.target.classList.contains('about-content')) {
+                entry.target.classList.add('visible');
+                const elements = entry.target.querySelectorAll('p, li, .contact-card');
+                elements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.opacity = 1;
+                        el.style.transform = 'translate(0)';
+                    }, index * 200);
+                });
+            } else {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
+            }
+        } else {
+            // Animate elements OUT
+            if(entry.target.classList.contains('about-content')) {
+                entry.target.classList.remove('visible');
+                const elements = entry.target.querySelectorAll('p, li, .contact-card');
+                elements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.opacity = 0;
+                        el.style.transform = 'translateY(20px)';
+                    }, index * 100);
+                });
+            } else {
+                entry.target.style.opacity = 0;
+                entry.target.style.transform = entry.target.classList.contains('project-card') || 
+                                              entry.target.classList.contains('contact-card')
+                    ? 'translateY(30px)'
+                    : 'translateY(20px)';
+            }
+        }
+    });
+}, { 
+    threshold: 0.1,
+    rootMargin: "0px 0px -25% 0px" 
+});
+
+
+
+
+// Observe all animatable elements
+const observedElements = [
+    ...document.querySelectorAll('.hero-content h1'),
+    ...document.querySelectorAll('.cta-button'),
+    ...document.querySelectorAll('.project-card'),
+    ...document.querySelectorAll('.about-content'),
+    ...document.querySelectorAll('.contact-card'),
+    ...document.querySelectorAll('.section-header')
+];
+
+
+
+observedElements.forEach(el => observer.observe(el));
+
+// Observe elements
+document.querySelectorAll('.hero-content h1, .cta-button, .about-content, .contact-card, section-header').forEach(el => {
+    generalObserver.observe(el);
+});
+
+projectObserver.observe(projectGrid);
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form Submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('Thank you for your message!');
+        });
+    </script>
+</body>
+</html>
