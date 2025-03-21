@@ -541,8 +541,9 @@
     .section-header p {
         font-size: 1.1rem;
         color: rgba(255, 255, 255, 0.8);
-        max-width: 600px;
-        margin: 0; /* Remove default margin */
+        max-width: 100%; /* Ensure the text doesn't overflow */
+        word-wrap: break-word; /* Break long words if necessary */
+        
     }
 
     /* Add this to make the header animate in when visible */
